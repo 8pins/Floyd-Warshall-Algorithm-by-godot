@@ -15,10 +15,12 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	self.global_position = parentNode.global_position
+	self.position = -parentNode.global_position
 	self.points[0] = parentNode.global_position
 	if (targetNode != null):
 		self.points[1] = targetNode.global_position
+	
+	$LineEdit.rect_position = (self.points[0] + self.points[1]) / 2 - $LineEdit.rect_pivot_offset
 
 
 func setFirstnode(parent):
