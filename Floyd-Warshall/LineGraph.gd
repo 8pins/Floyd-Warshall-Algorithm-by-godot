@@ -10,6 +10,7 @@ var parentNode  = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$arrow.hide()
 	pass # Replace with function body.
 
 
@@ -21,6 +22,14 @@ func _process(delta):
 		self.points[1] = targetNode.global_position
 	
 	$LineEdit.rect_position = (self.points[0] + self.points[1]) / 2 - $LineEdit.rect_pivot_offset
+	
+	if (points[1] != Vector2(0,0)):
+		$arrow.show()
+		$arrow.set_rotation((points[1] - points[0]).angle())
+		if targetNode != null:
+			$arrow.set_position((points[1]-points[0]) - (points[1]-points[0]).normalized()*40 + points[0])
+		else:
+			$arrow.set_position(points[1])
 
 
 func setFirstnode(parent):

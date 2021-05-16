@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://LineGraph.gd" type="Script" id=1]
+[ext_resource path="res://assets/arrow.png" type="Texture" id=2]
 
 [node name="LineGraph" type="Line2D"]
 points = PoolVector2Array( 0, 0, 0, 0 )
@@ -17,3 +18,7 @@ expand_to_text_length = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="arrow" type="Sprite" parent="."]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
