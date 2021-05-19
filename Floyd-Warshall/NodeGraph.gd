@@ -16,7 +16,7 @@ func _ready():
 	$Area2D.z_index = self.z_index
 	pass
 
-func _process(delta):
+func _process(_delta):
 	if(dragMouse):
 		set_position(get_viewport().get_mouse_position())
 	if dragLine:
@@ -32,7 +32,7 @@ func _process(delta):
 			
 
 
-func _on_Area2D_input_event(viewport, event, shape_idx):
+func _on_Area2D_input_event(_viewport, event, _shape_idx):
 	
 	if event is InputEventMouseButton:
 		if not SystemController.isDisableDrag:
@@ -73,7 +73,11 @@ func _on_Button_button_up():
 	SystemController.isDisableDrag = true
 	currentLine = lineGraph.instance()
 	currentLine.setFirstnode(self)
-
 	$ListLines.add_child(currentLine)
 	pass # Replace with function body.
+
+func getValue(i):
+	return $ListLines.get_node(str(i))
+	
+	pass
 
