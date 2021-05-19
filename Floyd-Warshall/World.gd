@@ -27,12 +27,12 @@ func _on_start_button_released():
 			else:
 				var node = $graph_group.get_node(str(i))
 				if node.get_name() == str(i):
-					if node.get_node("ListLines") != null :
-						var line = node.get_node("ListLines").get_node(str(j))
-						if line.targetNode.get_name() == str(j):
+					if node.get_node("ListLines").get_child_count() > 0:
+						if node.get_node("ListLines").has_node(str(j)):
+							var line = node.get_node("ListLines").get_node(str(j))
 							MatrixPath[i][j] = int(line.get_node("LineEdit").get_text())
 				pass # Replace with function body.
-	print(MatrixPath)
+	showMatrix()
 	return MatrixPath
 	pass # Replace with function body.
 
@@ -44,3 +44,6 @@ func create_2d_array(row, col):
 			matrix[x].append(9999)
 	return matrix
 
+func showMatrix():
+	for row in MatrixPath:
+		print(row)
