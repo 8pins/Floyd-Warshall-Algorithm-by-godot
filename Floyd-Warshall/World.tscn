@@ -6,9 +6,9 @@
 [ext_resource path="res://assets/Start.png" type="Texture" id=4]
 [ext_resource path="res://assets/Step.png" type="Texture" id=5]
 
-[sub_resource type="AnimatedTexture" id=2]
-
 [sub_resource type="AnimatedTexture" id=1]
+
+[sub_resource type="AnimatedTexture" id=2]
 
 [sub_resource type="AnimatedTexture" id=3]
 
@@ -19,7 +19,7 @@ script = ExtResource( 2 )
 position = Vector2( 940, 375 )
 scale = Vector2( 0.35, 0.35 )
 normal = ExtResource( 1 )
-pressed = SubResource( 2 )
+pressed = SubResource( 1 )
 
 [node name="graph_group" type="Node2D" parent="."]
 
@@ -29,7 +29,7 @@ light_mask = 0
 position = Vector2( 940, 525 )
 scale = Vector2( 0.35, 0.35 )
 normal = ExtResource( 3 )
-pressed = SubResource( 1 )
+pressed = SubResource( 2 )
 __meta__ = {
 "_editor_description_": ""
 }
@@ -40,7 +40,7 @@ light_mask = 0
 position = Vector2( 865, 525 )
 scale = Vector2( 0.35, 0.35 )
 normal = ExtResource( 5 )
-pressed = SubResource( 1 )
+pressed = SubResource( 2 )
 __meta__ = {
 "_editor_description_": ""
 }
