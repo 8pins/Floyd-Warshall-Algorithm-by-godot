@@ -70,5 +70,5 @@ func step_solve(step):
 			if (MatrixPath[i][j] > MatrixPath[i][step] + MatrixPath[step][j]):
 				MatrixPath[i][j] = MatrixPath[i][step] + MatrixPath[step][j]
 	return MatrixPath
-#	dung chuong trinh khi step_count lon
+#	dung chuong trinh khi step_count lon hon size
 	pass
