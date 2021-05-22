@@ -1,7 +1,7 @@
 class_name MainWorld
 extends Node2D
 
-var graph_node = preload("res://NodeGraph.tscn")
+var graph_node = preload("res://graphObject/NodeGraph.tscn")
 var current_nodeId = 0
 var MatrixPath = []
 var step_count = 0
@@ -18,7 +18,6 @@ func _on_add_button_released():
 	pass # Replace with function body.
 
 func _on_start_button_released():
-
 #	thuc hien thuat toan
 	for step in range (MatrixPath.size()):
 		step_solve(step)
@@ -60,9 +59,12 @@ func create_2d_array(row, col):
 			matrix[x].append(9999)
 	return matrix
 
-func showMatrix():
+func showMatrix() -> String:
+	var result = ""
 	for row in MatrixPath:
+		result += str(row) + "\n"
 		print(row)
+	return result
 
 func step_solve(step):
 	for i in range (MatrixPath.size()):

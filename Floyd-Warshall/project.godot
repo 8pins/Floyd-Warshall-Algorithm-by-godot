@@ -12,12 +12,12 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "MainWorld",
 "language": "GDScript",
-"path": "res://World.gd"
+"path": "res://app/scenes/World.gd"
 }, {
 "base": "Node2D",
 "class": "NodeGraph",
 "language": "GDScript",
-"path": "res://NodeGraph.gd"
+"path": "res://graphObject/NodeGraph.gd"
 } ]
 _global_script_class_icons={
 "MainWorld": "",
@@ -27,12 +27,12 @@ _global_script_class_icons={
 [application]
 
 config/name="Godot"
-run/main_scene="res://World.tscn"
+run/main_scene="res://app/scenes/World.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-SystemController="*res://SystemController.tscn"
+SystemController="*res://system/SystemController.tscn"
 
 [display]
 

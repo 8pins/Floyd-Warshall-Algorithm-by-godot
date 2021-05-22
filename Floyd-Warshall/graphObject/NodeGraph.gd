@@ -4,13 +4,19 @@ extends Node2D
 var dragMouse = false
 var dragLine = false
 var overLapAreas = []
-var lineGraph = preload("res://LineGraph.tscn")
+var lineGraph = preload("res://graphObject/LineGraph.tscn")
 
 var currentLine = null
 
 var ListChildGraph_Node = []
 
 #var state : int = 2   #0:dragging 1: lineDrag 2: idle
+
+func checkNodeChildExist(node_name):
+	for nodeGraph in ListChildGraph_Node:
+		if nodeGraph.get_name() == str(node_name):
+			return true
+	return false
 
 func _ready():
 	$Area2D.z_index = self.z_index
@@ -21,8 +27,11 @@ func _process(_delta):
 		set_position(get_viewport().get_mouse_position())
 	if dragLine:
 		if SystemController.tmpGraph_Node != null:
-			ListChildGraph_Node.append(SystemController.tmpGraph_Node)
-			currentLine.setSecondPoint(SystemController.tmpGraph_Node)
+			if not checkNodeChildExist(SystemController.tmpGraph_Node.get_name()):
+				ListChildGraph_Node.append(SystemController.tmpGraph_Node)
+				currentLine.setSecondPoint(SystemController.tmpGraph_Node)
+			else:
+				currentLine.queue_free()
 			SystemController.tmpGraph_Node = null
 			dragLine = false
 			$Button.disabled = false
