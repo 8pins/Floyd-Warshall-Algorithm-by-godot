@@ -1,81 +1,119 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://assets/Start.png" type="Texture" id=1]
-[ext_resource path="res://assets/Step.png" type="Texture" id=2]
-[ext_resource path="res://assets/Add.png" type="Texture" id=3]
-[ext_resource path="res://assets/Solve.png" type="Texture" id=4]
+[ext_resource path="res://app/scenes/UI_graphSolveController.gd" type="Script" id=1]
 [ext_resource path="res://app/scenes/World.gd" type="Script" id=5]
 
-[sub_resource type="AnimatedTexture" id=1]
-
-[sub_resource type="AnimatedTexture" id=2]
-
-[sub_resource type="AnimatedTexture" id=3]
+[sub_resource type="Animation" id=1]
+resource_name = "slide_in"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.233258, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 384, 0 ) ]
+}
 
 [node name="UI_graphSolve" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -704.0
+margin_right = -1024.0
+margin_bottom = -600.0
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Panel" type="Panel" parent="."]
-margin_right = 384.0
+margin_left = -384.0
 margin_bottom = 600.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="result_screen" type="RichTextLabel" parent="Panel"]
+[node name="result_screen" type="TextEdit" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 margin_left = 16.0
 margin_top = 16.0
-margin_right = 368.0
-margin_bottom = 400.0
+margin_right = -16.0
+margin_bottom = -128.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="init_matrix" type="Button" parent="Panel"]
+margin_left = 32.0
+margin_top = 488.0
+margin_right = 352.0
+margin_bottom = 528.0
+text = "Init matrix"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="solve_by_step" type="Button" parent="Panel"]
+margin_left = 32.0
+margin_top = 536.0
+margin_right = 192.0
+margin_bottom = 576.0
+text = "Solve step"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="solve_full" type="Button" parent="Panel"]
+margin_left = 200.0
+margin_top = 536.0
+margin_right = 352.0
+margin_bottom = 576.0
+text = "Solve full matrix"
+
 [node name="World" type="Node2D" parent="."]
 script = ExtResource( 5 )
 
-[node name="add_button" type="TouchScreenButton" parent="World"]
-position = Vector2( 16.0001, 408 )
-scale = Vector2( 0.35, 0.35 )
-normal = ExtResource( 3 )
-pressed = SubResource( 1 )
-
 [node name="graph_group" type="Node2D" parent="World"]
 
-[node name="solve_button" type="TouchScreenButton" parent="World"]
-modulate = Color( 0.984314, 0.92549, 0.0235294, 1 )
-light_mask = 0
-position = Vector2( 80.0001, 536 )
-scale = Vector2( 0.35, 0.35 )
-normal = ExtResource( 4 )
-pressed = SubResource( 2 )
+[node name="add_node" type="Button" parent="."]
+margin_left = 960.0
+margin_top = 536.0
+margin_right = 1024.0
+margin_bottom = 600.0
+text = "Add"
 __meta__ = {
-"_editor_description_": ""
+"_edit_use_anchors_": false
 }
 
-[node name="step_buttom" type="TouchScreenButton" parent="World"]
-modulate = Color( 0.984314, 0.92549, 0.0235294, 1 )
-light_mask = 0
-position = Vector2( 16.0001, 536 )
-scale = Vector2( 0.35, 0.35 )
-normal = ExtResource( 2 )
-pressed = SubResource( 2 )
+[node name="clear" type="Button" parent="."]
+margin_left = 888.0
+margin_top = 536.0
+margin_right = 952.0
+margin_bottom = 600.0
+text = "clear"
 __meta__ = {
-"_editor_description_": ""
+"_edit_use_anchors_": false
 }
 
-[node name="start" type="TouchScreenButton" parent="World"]
-position = Vector2( 16.0001, 472 )
-scale = Vector2( 0.35, 0.35 )
-normal = ExtResource( 1 )
-pressed = SubResource( 3 )
+[node name="panel_Slide" type="Button" parent="."]
+margin_top = 248.0
+margin_right = 40.0
+margin_bottom = 352.0
+text = ">"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[connection signal="released" from="World/add_button" to="World" method="_on_add_button_released"]
-[connection signal="released" from="World/solve_button" to="World" method="_on_start_button_released"]
-[connection signal="released" from="World/step_buttom" to="World" method="_on_step_buttom_released"]
-[connection signal="released" from="World/start" to="World" method="_on_start_released"]
+[node name="Animated_PanelSlide" type="AnimationPlayer" parent="."]
+anims/slide_in = SubResource( 1 )
+
+[connection signal="button_up" from="Panel/init_matrix" to="." method="_on_init_matrix_button_up"]
+[connection signal="button_up" from="Panel/solve_by_step" to="." method="_on_solve_by_step_button_up"]
+[connection signal="button_up" from="Panel/solve_full" to="." method="_on_solve_full_button_up"]
+[connection signal="button_up" from="add_node" to="." method="_on_add_node_button_up"]
+[connection signal="button_up" from="clear" to="." method="_on_clear_button_up"]
+[connection signal="button_up" from="panel_Slide" to="." method="_on_panel_Slide_button_up"]

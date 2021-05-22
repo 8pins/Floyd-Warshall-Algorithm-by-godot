@@ -17,12 +17,12 @@ func _on_add_button_released():
 	get_node("graph_group").add_child(node)
 	pass # Replace with function body.
 
-func _on_start_button_released():
+func _on_solve_released() -> String:
 #	thuc hien thuat toan
 	for step in range (MatrixPath.size()):
 		step_solve(step)
-	showMatrix()
-	return MatrixPath
+	var result = "Solving result= \n" + showMatrix() + "\n"
+	return result
 	pass # Replace with function body.
 
 func _on_step_buttom_released():
@@ -32,7 +32,7 @@ func _on_step_buttom_released():
 		print("Stop")
 	pass # Replace with function body.
 
-func _on_start_released():
+func _on_initMatrix_released() -> String:
 	MatrixPath = create_2d_array($graph_group.get_child_count(), $graph_group.get_child_count())
 #	var sizeMat = $graph_group.get_child_count()
 	for i in range(MatrixPath.size()):
@@ -47,10 +47,14 @@ func _on_start_released():
 							var line = node.get_node("ListLines").get_node(str(j))
 							MatrixPath[i][j] = int(line.get_node("LineEdit").get_text())
 				pass # Replace with function body.
-	showMatrix()
-	return MatrixPath
-	pass # Replace with function body.
-	
+	var result = "Init new matrix here: \n" + showMatrix() + "\n"
+	return result
+
+func _clear_graph():
+	current_nodeId = 0
+	for child in $graph_group.get_children():
+		child.queue_free()
+
 func create_2d_array(row, col): 
 	var matrix  = []
 	for x in range (col):
@@ -62,7 +66,9 @@ func create_2d_array(row, col):
 func showMatrix() -> String:
 	var result = ""
 	for row in MatrixPath:
-		result += str(row) + "\n"
+		for i in row:
+			result += str(i) + "\t"
+		result += "\n"
 		print(row)
 	return result
 
@@ -70,6 +76,7 @@ func step_solve(step):
 	for i in range (MatrixPath.size()):
 		for j in range (MatrixPath.size()):
 			if (MatrixPath[i][j] > MatrixPath[i][step] + MatrixPath[step][j]):
+				
 				MatrixPath[i][j] = MatrixPath[i][step] + MatrixPath[step][j]
 	return MatrixPath
 #	dung chuong trinh khi step_count lon hon size
